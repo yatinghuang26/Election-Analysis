@@ -10,6 +10,11 @@ total_votes = 0             # retrieve the total number of votes
 list_of_candidates = []     # retrieve the list of unique candidates
 candidate_votes = {}        # retrieve the total number of votes each candidate receives
 
+# Winning Candidate and Winning Count Tracker
+winning_candidate = ""
+winning_count = 0
+winning_percentage = 0
+
 with open(file_to_load, 'r') as election_data:
 
     # Use the built-in reader that came from the csv file in order to read election data
@@ -74,10 +79,36 @@ print(f'The number of votes each candidate received: {candidate_votes}')
         Retrieve the number of votes each candidate received
         Loop through all key-value pairs in our dictionary
         For each key-value pair, calculate the percentage of votes and print it out
+    
+    Pseudocode to determine the winner of the election:
+        Initialize the winning candidate as "" and their winning votes and percentages as 0
+        Retrieve the total number of votes
+        Retrieve the number of votes each candidate received
+        Loop through all key-value pairs in our dictionary
+        For each key-value pair, calculate the percentage of votes
+            If the current candidate's vote is greater than the current winning votes
+                AND if the current candidate's percentage is greater than the current winning percentage
+                update the winning candidate and their winnings votes and percentages
+        Print out the information of the winning candidate
+
 """
 for candidate in candidate_votes.keys():
     percentage_votes = candidate_votes[candidate] / total_votes * 100
     print(f"{candidate}: received {percentage_votes:.2f}% of the vote.")
 
+    # Check to see if the current candidate's number of votes and percentage of votes are greater than the current largest votes and percentages
+    if candidate_votes[candidate] > winning_count and percentage_votes > winning_percentage:
+        # Update the winning cadidate, winning vote, and winning percentage
+        winning_candidate = candidate
+        winning_count = candidate_votes[candidate]
+        winning_percentage = percentage_votes
+
+winning_candidate_summary = (
+    f"-------------------------\n"
+    f"Winner: {winning_candidate}\n"
+    f"Winning Vote Count: {winning_count:,}\n"
+    f"Winning Percentage: {winning_percentage:.2f}%\n"
+    f"-------------------------\n")
+print(winning_candidate_summary)
 
 
