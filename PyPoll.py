@@ -64,11 +64,20 @@ with open(file_to_load, 'r') as election_data:
         else:
             candidate_votes[row[2]] += 1        # increment by 1
 
-
 print(f'The total number of votes cast is {total_votes}')
 print(f'The list of candidates: {list_of_candidates}')
 print(f'The number of votes each candidate received: {candidate_votes}')
 
+"""
+    Pseudocode to get the percentage of votes each candidate received:
+        Retrieve the total number of votes
+        Retrieve the number of votes each candidate received
+        Loop through all key-value pairs in our dictionary
+        For each key-value pair, calculate the percentage of votes and print it out
+"""
+for candidate in candidate_votes.keys():
+    percentage_votes = candidate_votes[candidate] / total_votes * 100
+    print(f"{candidate}: received {percentage_votes:.2f}% of the vote.")
 
 
-    
+
