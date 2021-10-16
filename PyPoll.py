@@ -6,6 +6,8 @@ import csv
 file_to_load = 'Resources/election_results.csv'
 file_to_save = os.path.join('Analysis', 'election_results.txt')
 
+total_votes = 0   # retrieve the total number of votes
+
 with open(file_to_load, 'r') as election_data:
 
     # Use the built-in reader that came from the csv file in order to read election data
@@ -13,8 +15,26 @@ with open(file_to_load, 'r') as election_data:
 
     # Read the header first, because it's not part of our data.
     headers = next(election_data)
-    print(headers)
+    #print(headers)
+
+    """
+    Total number of votes cast
+        A complete list of candidates who received votes
+        Total number of votes each candidate received
+        Percentage of votes each candidate won
+        The winner of the election based on popular vote
+
+    Pseudocode for total number of votes cast:
+        Create a variable to store the total number of votes.
+        Open the data file.
+        If applicable, read and ignore headers.
+        Create a loop to increment the total number of votes.
+    """
 
     # Read each row from the file reader 1 at a time
     for row in file_reader:
-        print(row)
+        total_votes += 1
+
+print(f'The total number of voites cast is {total_votes}')
+
+    
